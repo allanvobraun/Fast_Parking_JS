@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,29 +13,48 @@
     <script src="main.js" defer></script>
 
 </head>
+
 <body>
     <header id="header">
         <h1>Sistema <span id="Fast">Fast</span><span id="Parking">Parking</span></h1>
         <img src="logoFastParking.png" alt="FastParking" title="FastParking">
     </header>
     <main>
-        <div id="container-register">       
-            <form id="form-register">
+        <div class="modal" id="modal">
+            <form id="modal-content">
                 <div>
                     <label for="nome">Nome</label>
-                    <input type="text" class="input-form" id="nome" placeholder="Nome" required/>
+                    <input type="text" class="input-form" id="nomeModal" placeholder="Nome" required />
                 </div>
                 <div>
                     <label for="placa">Placa</label>
-                    <input type="text" class="input-form" id="placa" placeholder="Placa" required/>
+                    <input type="text" class="input-form" id="placaModal" placeholder="Placa" required />
                 </div>
             </form>
-            <footer id="footer-register">
-                <button type="submit" class="button green" id="salvar">Salvar</button>
-                <button type="button" class="button yellow" id="cancelar" onclick="javascript:window.location.href='precos.html'">Preços</button>
-            </footer>
-            
+            <div id="div-register">
+                <button type="submit" class="button green" id="salvarModal">Salvar</button>
+                <button type="button" class="button yellow" id="cancelar"
+                    onclick="javascript:window.location.href='index.html'">Cancelar</button>
+            </div>
         </div>
+        <div id="container-register">
+            <form id="form-register">
+                <div>
+                    <label for="nome">Nome</label>
+                    <input type="text" class="input-form" id="nome" placeholder="Nome" required />
+                </div>
+                <div>
+                    <label for="placa">Placa</label>
+                    <input type="text" class="input-form" id="placa" placeholder="Placa" required />
+                </div>
+            </form>
+            <div id="div-register">
+                <button type="submit" class="button green" id="salvar">Salvar</button>
+                <button type="button" class="button yellow" id="cancelar"
+                    onclick="javascript:window.location.href='precos.html'">Preços</button>
+            </div>
+        </div>
+
         <table id="table">
             <thead>
                 <tr>
@@ -51,9 +71,10 @@
                 <td>12/11/2018</td>
                 <td>14:00</td>
                 <td>
-                    <button class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
-                    <button class="button blue" type="button">Editar</button>
-                    <button class="button red" type="button">Saída</button>
+                    <button class="button green" type="button"
+                        onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
+                    <button class="button blue" type="button" id="editar">Editar</button>
+                    <button class="button red" type="button" id="saida">Saída</button>
                 </td>
             </tbody>
             <tbody>
@@ -62,12 +83,19 @@
                 <td>12/11/2018</td>
                 <td>14:11</td>
                 <td>
-                    <button class="button green" type="button" onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
+                    <button class="button green" type="button" id="comp"
+                        onclick="javascript:window.location.href='comprovante.html'">Comp.</button>
                     <button class="button blue" type="button">Editar</button>
                     <button class="button red" type="button">Saída</button>
                 </td>
             </tbody>
         </table>
-    </main>    
+    </main>
+    <footer>
+        <div>
+            <small>Copyright &copy; Matheus Willian de Oliveira</small>
+        </div>
+    </footer>
 </body>
+
 </html>

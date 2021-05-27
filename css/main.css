@@ -22,7 +22,7 @@
 
 #table thead th:last-child,
 #table tbody td:last-child {
-    max-width: 200px;
+    max-width: 300px;
     text-align: center;
 }
 
@@ -107,7 +107,7 @@
     align-items: center;
 }
 
-#footer-register {
+#div-register {
     display: flex;
     margin: 0 auto 30px;
     gap: 20px;
@@ -162,7 +162,7 @@
     align-items: center;
 }
 
-#footer-price {
+#div-price {
     display: flex;
     margin: 0 auto 30px;
     gap: 60px;
@@ -203,7 +203,7 @@
 
 }
 
-#footer-receipt {
+#div-receipt {
     display: flex;
     margin: 0 auto;
     gap: 60px;
@@ -217,4 +217,47 @@
 .input-readonly:focus {
     outline-style: none;
     border-bottom: solid 1px black;
+}
+
+footer {
+    height: 50px;
+    background-color: #343a40;
+    color: whitesmoke;
+    text-align: center;
+    line-height: 50px;
+}
+
+.modal {
+    width: calc(40px + 35vw);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: -10;
+    opacity: 0;
+
+    border: solid 2px black;
+
+    margin: 0 auto 5vh;
+    border-radius: 5px;
+    background-color: black;
+}
+
+.modal.active{
+    z-index: 5000;
+    opacity: 1;
+}
+
+#modal-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+    margin: 40px auto;
+}
+
+#modal-content div {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
