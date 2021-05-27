@@ -38,7 +38,7 @@ const createRow = (owner, index) => {
         <td>${owner.data}</td>
         <td>${owner.hora}</td>
         <td>
-            <button class="button green" type="button" id="comp">Comp.</button>
+            <button class="button green" type="button" data-owerid="${owner.id}" data-action="comp-${index}" id="comp">Comp.</button>
             <button class="button blue" type="button" id="editar" data-action="editar-${index}">Editar</button>
             <button class="button red" type="button" id="saida" data-action="saida-${index}">Saída</button>
         </td>
@@ -102,6 +102,7 @@ const saveOwner = () => {
             data: dateNow,
             hora: hoursMinutesNow
         }
+        newOwner.id = newOwner.nome + newOwner.placa + newOwner.data
 
         const index = document.querySelector('#nome').dataset.index
 
@@ -137,49 +138,26 @@ const editOwner = (index) => {
     openModal()
 }
 
-// const actionButtons = (event) => {
-//     const element = event.target
-//     if (element.type === 'button') {
-//         const action = element.dataset.action.split('-')
-//         if (action[0] === 'saida') {
-//             deleteOwner(action[1])
-//             console.log("saida")
-//         } else  {
-//             editOwner(action[1])
-//             console.log("editar")
-//         }
-//     }
-// }
-
-
-
-
 
 function actionButtons(event) {
     const element = event.target
     if (element.type !== 'button') {
         return;
     }
-    console.log(element.dataset);
-
     const action = element.dataset.action.split('-')
+    const id = element.dataset.owerid;
 
     const actions = {
         'saida': () => deleteOwner(action[1]),
         'editar': () => editOwner(action[1]),
-        'comp': () => window.location.replace('comprovante.html?'),
+        'comp': () => window.location.replace('comprovante.html?id=' + id),
     }
 
     const actionCallback = actions[action[0]]
     actionCallback()
 }
 
-function openComprovante() {
-    const queryString = '';
 
-}
-
-// if (action[0] == 'editar')
 
 document.querySelector('#salvar').addEventListener('click', saveOwner)
 // document.querySelector('#comp').addEventListener('click', updateComp)

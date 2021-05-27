@@ -1,22 +1,26 @@
-import {readDB} from './commom.js';
+import { readDB } from './commom.js';
 
-function createComprovante() {
-  const recordOwner = document.querySelector('#form-receipt')
-  const newInput = document.createElement('input')
-  newInput.innerHTML = `
-                    <label>Nome:</label>
-                    <input class="input-readonly" value="${owner.nome}" readonly/>
-
-                    <label>Placa:</label>
-                    <input class="input-readonly" value="${db.placa}" readonly/>
-
-                    <label>Data:</label>
-                    <input class="input-readonly" value="${db.data}" readonly/>
-
-                    <label>Hora:</label>
-                    <input class="input-readonly" value="${db.hora}" readonly/>
-    `
-  recordOwner.appendChild(newInput)
+function getIdFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search)
+  return urlParams.get('id')
 }
 
-console.log(readDB())
+function buildComprovante(owner) {
+  const inputs = [
+    document.getElementById('nome'),
+    document.getElementById('placa'),
+    document.getElementById('data'),
+    document.getElementById('hora'),
+  ]
+
+  inputs.forEach((input) => {
+    input.value = owner[input.id]
+  })
+}
+
+const db = readDB();
+const owner = db.find((owner) => owner.id === getIdFromUrl())
+buildComprovante(owner)
+
+
+
