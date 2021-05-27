@@ -1,5 +1,6 @@
 'use strict'
 // owner = proprietario
+import {readDB} from './commom.js';
 
 const openModal = () => document.querySelector('.modal')
     .classList.add('active')
@@ -7,7 +8,6 @@ const openModal = () => document.querySelector('.modal')
 const closeModal = () => document.querySelector('.modal')
     .classList.remove('active')
 
-const readDB = () => JSON.parse(window.localStorage.getItem('db')) ?? []
 const setDB = (db) => localStorage.setItem('db', JSON.stringify(db))
 
 const insertDB = (owner) => {
@@ -38,9 +38,7 @@ const createRow = (owner, index) => {
         <td>${owner.data}</td>
         <td>${owner.hora}</td>
         <td>
-            <button class="button green" type="button" id="comp" 
-                onclick="javascript:window.location.href='comprovante.html'"
-            >Comp.</button>
+            <button class="button green" type="button" id="comp">Comp.</button>
             <button class="button blue" type="button" id="editar" data-action="editar-${index}">Editar</button>
             <button class="button red" type="button" id="saida" data-action="saida-${index}">Saída</button>
         </td>
@@ -139,25 +137,54 @@ const editOwner = (index) => {
     openModal()
 }
 
-const actionButttons = (event) => {
+// const actionButtons = (event) => {
+//     const element = event.target
+//     if (element.type === 'button') {
+//         const action = element.dataset.action.split('-')
+//         if (action[0] === 'saida') {
+//             deleteOwner(action[1])
+//             console.log("saida")
+//         } else  {
+//             editOwner(action[1])
+//             console.log("editar")
+//         }
+//     }
+// }
+
+
+
+
+
+function actionButtons(event) {
     const element = event.target
-    if (element.type === 'button') {
-        const action = element.dataset.action.split('-')
-        if (action[0] === 'saida') {
-            deleteOwner(action[1])
-            console.log("saida")
-        } else  {
-            editOwner(action[1])
-            console.log("editar")
-        }
+    if (element.type !== 'button') {
+        return;
     }
+    console.log(element.dataset);
+
+    const action = element.dataset.action.split('-')
+
+    const actions = {
+        'saida': () => deleteOwner(action[1]),
+        'editar': () => editOwner(action[1]),
+        'comp': () => window.location.replace('comprovante.html?'),
+    }
+
+    const actionCallback = actions[action[0]]
+    actionCallback()
 }
+
+function openComprovante() {
+    const queryString = '';
+
+}
+
 // if (action[0] == 'editar')
 
 document.querySelector('#salvar').addEventListener('click', saveOwner)
 // document.querySelector('#comp').addEventListener('click', updateComp)
 // document.querySelector('#editar').addEventListener('click', console.log("editar"))
 // document.querySelector('#saida').addEventListener('click', console.log("saida"))
-document.querySelector('#table').addEventListener('click', actionButttons)
+document.querySelector('#table').addEventListener('click', actionButtons)
 
 updateTable()
